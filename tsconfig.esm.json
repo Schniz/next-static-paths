@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig.json",
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "declaration": true,
+    "module": "esnext",
+    "outDir": "./dist/esm",
+    "jsx": "react"
+  },
+  "include": ["src/**/*.ts", "src/**/*.tsx", "root.d.ts"]
+}

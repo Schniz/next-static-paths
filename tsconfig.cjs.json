@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig.json",
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "module": "commonjs",
+    "outDir": "./dist/cjs",
+    "jsx": "react"
+  },
+  "include": ["src/**/*.ts", "src/**/*.tsx", "root.d.ts"]
+}
