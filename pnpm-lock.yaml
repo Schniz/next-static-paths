@@ -8,6 +8,7 @@ specifiers:
   esbuild: ^0.14.25
   globby: '11'
   next: ^12.1.0
+  prettier: ^2.6.0
   react: ^17.0.2
   react-dom: ^17.0.2
   typescript: ^4.6.2
@@ -21,6 +22,7 @@ devDependencies:
   esbuild: 0.14.27
   globby: 11.1.0
   next: 12.1.0_react-dom@17.0.2+react@17.0.2
+  prettier: 2.6.0
   react: 17.0.2
   react-dom: 17.0.2_react@17.0.2
   typescript: 4.6.2
@@ -901,6 +903,12 @@ packages:
       nanoid: 3.3.1
       picocolors: 1.0.0
       source-map-js: 1.0.2
+    dev: true
+
+  /prettier/2.6.0:
+    resolution: {integrity: sha512-m2FgJibYrBGGgQXNzfd0PuDGShJgRavjUoRCw1mZERIWVSXF0iLzLm+aOqTAbLnC3n6JzUhAA8uZnFVghHJ86A==}
+    engines: {node: '>=10.13.0'}
+    hasBin: true
     dev: true
 
   /queue-microtask/1.2.3:
