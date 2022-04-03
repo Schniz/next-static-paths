@@ -6,7 +6,7 @@ export function filePathToPathname(
   return filePath
     .replace(extensionsRegex, "")
     .replace(/^/, "/")
-    .replace(/\/(_middleware|index)$|/, "")
+    .replace(/\/(_middleware|index)$/, "")
     .replace(/\/+$/, "")
     .replace(/^$/, "/");
 }
