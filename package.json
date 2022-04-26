@@ -27,6 +27,7 @@
   "author": "Gal Schlezinger <gal@spitfire.co.il>",
   "license": "MIT",
   "devDependencies": {
+    "@changesets/cli": "^2.22.0",
     "@swc-node/register": "^1.4.2",
     "@types/react": "^17.0.42",
     "chalk": "4",
