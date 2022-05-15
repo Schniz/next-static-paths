@@ -3,6 +3,7 @@ on:
     branches:
       - main
 
+name: "release"
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:
@@ -12,6 +13,10 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v2
+
+      - uses: pnpm/action-setup@v2.2.1
+        with:
+          version: 6.31.0
 
       - name: Setup Node.js 16.x
         uses: actions/setup-node@v2
