@@ -17,6 +17,11 @@
   "bin": {
     "next-static-paths": "./bin/next-static-paths.js"
   },
+  "repository": {
+    "url": "https://github.com/Schniz/next-static-paths",
+    "type": "git",
+    "directory": "packages/next-static-paths"
+  },
   "files": [
     "bin",
     "dist",
