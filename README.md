@@ -8,7 +8,7 @@ Statically prevent HTTP 404 Not Found in your Next.js applications using TypeScr
 
 🔗 A `<TypedLink />` component which wraps Next.js `<Link />` and provides type-safe path matching
 
-📝 A `urlFor` helper that enables path generation in a type-safe manner
+📝 A `pathFor` helper that enables path generation in a type-safe manner
 
 ## Usage
 
