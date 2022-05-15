@@ -4,8 +4,10 @@ importers:
 
   .:
     specifiers:
+      '@changesets/cli': ^2.22.0
       turbo: ^1.2.9
     devDependencies:
+      '@changesets/cli': 2.22.0
       turbo: 1.2.9
 
   packages/example-app:
@@ -33,7 +35,6 @@ importers:
 
   packages/next-static-paths:
     specifiers:
-      '@changesets/cli': ^2.22.0
       '@swc-node/register': ^1.4.2
       '@types/react': ^17.0.42
       chalk: '4'
@@ -47,7 +48,6 @@ importers:
       typescript: ^4.6.2
       vitest: ^0.5.9
     devDependencies:
-      '@changesets/cli': 2.22.0
       '@swc-node/register': 1.4.2
       '@types/react': 17.0.42
       chalk: 4.1.2
