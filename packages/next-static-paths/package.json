@@ -1,0 +1,49 @@
+{
+  "name": "next-static-paths",
+  "version": "0.0.3",
+  "description": "Static types for routing in Next.js apps",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "types": "./root.d.ts",
+  "scripts": {
+    "bin": "pnpm run --silent ts-node -- cli/index.ts",
+    "build": "rm -rf dist; pnpm run build:cli && pnpm run build:lib",
+    "build:cli": "pnpm run --silent -- ts-node ./scripts/build.ts",
+    "build:lib": "tsc -p ./tsconfig.cjs.json && tsc -p ./tsconfig.esm.json",
+    "test": "vitest",
+    "ts-node": "node -r @swc-node/register",
+    "lint": "prettier src/**/*.ts cli/**/*.ts --check"
+  },
+  "bin": {
+    "next-static-paths": "./bin/next-static-paths.js"
+  },
+  "files": [
+    "bin",
+    "dist",
+    "root.d.ts",
+    "augment.d.ts"
+  ],
+  "keywords": [],
+  "author": "Gal Schlezinger <gal@spitfire.co.il>",
+  "license": "MIT",
+  "devDependencies": {
+    "@changesets/cli": "^2.22.0",
+    "@swc-node/register": "^1.4.2",
+    "@types/react": "^17.0.42",
+    "chalk": "4",
+    "cmd-ts": "^0.10.0",
+    "esbuild": "^0.14.25",
+    "globby": "11",
+    "next": "^12.1.0",
+    "prettier": "^2.6.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "typescript": "^4.6.2",
+    "vitest": "^0.5.9"
+  },
+  "peerDependencies": {
+    "next": "^12.1.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  }
+}
