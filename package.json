@@ -4,7 +4,8 @@
   "scripts": {
     "build": "FORCE_COLOR=1 turbo run build",
     "lint": "FORCE_COLOR=1 turbo run lint",
-    "test": "FORCE_COLOR=1 turbo run test"
+    "test": "FORCE_COLOR=1 turbo run test",
+    "changeset:version": "changesets version && pnpm install"
   },
   "devDependencies": {
     "@changesets/cli": "^2.22.0",
