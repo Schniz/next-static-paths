@@ -2,9 +2,9 @@
   "name": "next-static-paths-monorepo",
   "private": true,
   "scripts": {
-    "build": "turbo run build",
-    "lint": "turbo run lint",
-    "test": "turbo run test"
+    "build": "FORCE_COLOR=1 turbo run build",
+    "lint": "FORCE_COLOR=1 turbo run lint",
+    "test": "FORCE_COLOR=1 turbo run test"
   },
   "devDependencies": {
     "turbo": "^1.2.9"
