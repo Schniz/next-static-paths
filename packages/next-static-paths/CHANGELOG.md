@@ -1,5 +1,11 @@
 # next-static-paths
 
+## 0.0.5
+
+### Patch Changes
+
+- 477976c: Add repository to package.json
+
 ## 0.0.4
 
 ### Patch Changes
