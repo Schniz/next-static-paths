@@ -1,5 +1,11 @@
 # next-static-paths
 
+## 0.0.6
+
+### Patch Changes
+
+- d81f4ff: add a readme to the npm package
+
 ## 0.0.5
 
 ### Patch Changes
