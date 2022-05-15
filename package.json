@@ -5,7 +5,7 @@
     "build": "FORCE_COLOR=1 turbo run build",
     "lint": "FORCE_COLOR=1 turbo run lint",
     "test": "FORCE_COLOR=1 turbo run test",
-    "changeset:version": "changeset version && pnpm install"
+    "changeset:version": "changeset version && pnpm install --no-frozen-lockfile"
   },
   "devDependencies": {
     "@changesets/cli": "^2.22.0",
