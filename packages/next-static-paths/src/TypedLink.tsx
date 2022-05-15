@@ -11,6 +11,23 @@ export function TypedLink<K extends keyof Paths>(
   props: React.PropsWithChildren<TypedLinkProps<K>>
 ) {
   const as = (props as any).as as string;
-  const generatedPath = (pathFor as any)(as, props);
-  return <Link {...props} href={generatedPath} />;
+  const restProps = omit(props, "as");
+  if (typeof as !== "string") {
+    throw new Error("`as` prop is required");
+  }
+  const generatedPath = (pathFor as any)(as, restProps);
+  return <Link {...restProps} href={generatedPath} />;
+}
+
+function omit<T, Keys extends string>(
+  value: T,
+  ...keys: Keys[]
+): Omit<T, Keys> {
+  const output = {} as Omit<T, Keys>;
+  for (const [key, v] of Object.entries(value)) {
+    if (!keys.includes(key as Keys)) {
+      output[key as keyof Omit<T, Keys>] = v;
+    }
+  }
+  return output;
 }
