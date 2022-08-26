@@ -131,8 +131,10 @@ export const generate = command({
       });
     }
 
+    const sortedRoutes = new Map([...routes].sort());
+
     const helpers: string[] = [];
-    for (const { pathname, helper, arguments: args } of routes.values()) {
+    for (const { pathname, helper, arguments: args } of sortedRoutes.values()) {
       if (helper) {
         helpers.push(generateHelperCode(helper, pathname, args));
         console.error(
@@ -178,7 +180,7 @@ export const generate = command({
           getIntroString(),
           "",
           `declare module "@@@next-static-paths" {`,
-          getInterface([...routes.values()]).replace(/^/gm, "  "),
+          getInterface([...sortedRoutes.values()]).replace(/^/gm, "  "),
           "}",
         ].join("\n")
       ),
@@ -190,7 +192,10 @@ export const generate = command({
     if (helpers.length) {
       await write(process.stderr, `${chalk.cyan(helpers.length)} helpers for `);
     }
-    await write(process.stderr, `${chalk.cyan(routes.size)} static paths.`);
+    await write(
+      process.stderr,
+      `${chalk.cyan(sortedRoutes.size)} static paths.`
+    );
     await write(process.stderr, "\n");
   },
 });
