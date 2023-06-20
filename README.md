@@ -1,3 +1,9 @@
+# This feature is supported natively in [Next.js 13.2](https://nextjs.org/13-2)
+
+upgrade and have fun!
+
+---
+
 # `next-static-paths`
 
 Statically prevent HTTP 404 Not Found in your Next.js applications using TypeScript and code generation.
