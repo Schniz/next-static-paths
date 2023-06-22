@@ -26,7 +26,7 @@ export function getAppArgumentsFromPath(pathname: string): ArgObject {
   }
   for (const match of matches) {
     const argumentName = match.slice(1, -1);
-     if (argumentName.startsWith("[...")) {
+    if (argumentName.startsWith("[...")) {
       const varadictAppArgumentName = match.slice(4, -1);
       output[varadictAppArgumentName] = "variadic";
     } else {
@@ -35,8 +35,6 @@ export function getAppArgumentsFromPath(pathname: string): ArgObject {
   }
   return output;
 }
-
-
 
 export function argObjectToTypeString(argObject: ArgObject): string {
   const entries = Object.entries(argObject);
