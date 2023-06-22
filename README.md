@@ -3,8 +3,6 @@ that supports next.js 13 app router.
 
 Although [Next.js 13.2](https://nextjs.org/blog/next-13-2#statically-typed-links) added experimental `typeRoutes` feature for statically typed links -
 we cannot easily search them as plain text.
-
-This library aims to solve it.
 See https://github.com/vercel/next.js/discussions/50118
 
 # `@nirtamir2/next-static-paths`
