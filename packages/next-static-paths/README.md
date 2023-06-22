@@ -28,11 +28,11 @@ $ npx next-static-paths
 ### `TypedLink` component
 
 ```tsx
-import { TypedLink } from "next-static-paths";
+import { TypedLink } from "@nirtamir2/next-static-paths";
 function MyComponent() {
   return (
     <TypedLink as="/some/[myArgument]" myArgument="hello world">
-      <a>Hello world</a>
+      Hello world
     </TypedLink>
   );
 }
@@ -41,7 +41,7 @@ function MyComponent() {
 ### `pathFor` helper
 
 ```tsx
-import { pathFor } from "next-static-paths";
+import { pathFor } from "@nirtamir2/next-static-paths";
 
 function getPath() {
   return pathFor("/some/[myArgument]", { myArgument: "hello world" });

@@ -1,27 +1,31 @@
 import {
+  array,
   command,
+  extendType,
   multioption,
   option,
   string,
-  array,
-  extendType,
 } from "cmd-ts";
 import { Directory } from "cmd-ts/batteries/fs";
-import globby from "globby";
+import { globbyStream } from "globby";
 import path from "path";
-import fs from "fs/promises";
+import { promises as fs } from "fs";
 import chalk from "chalk";
 import { existsSync } from "fs";
 import { type Writable } from "stream";
-import { filePathToPathname } from "./filePathToPathname";
 import {
+  appFilePathToPathname,
+  pageFilePathToPathname,
+} from "./pageFilePathToPathname";
+import {
+  generateHelperCode,
   getHelperJsDocs,
   HelperJsDocs,
-  generateHelperCode,
 } from "./helperJsDocs";
 import {
   ArgObject,
   argObjectToTypeString,
+  getAppArgumentsFromPath,
   getArgumentsFromPath,
 } from "./argObject";
 
@@ -50,6 +54,80 @@ const PageExtensionType = extendType(array(string), {
   displayName: "ext",
 });
 
+async function getPagesRoutesMap(
+  srcDirectory: string,
+  pageExtensions: ReadonlyArray<string>
+) {
+  const pagesDirectory = path.join(srcDirectory, "pages");
+
+  const pagesGlobber = globbyStream(`**/*.{${pageExtensions.join(",")}}`, {
+    cwd: pagesDirectory,
+    ignore: [
+      ignoredFile("_app", pageExtensions),
+      ignoredFile("_document", pageExtensions),
+    ],
+  });
+
+  const routes = new Map<string, Route>();
+
+  for await (const pathAsMaybeString of pagesGlobber) {
+    const filepath = String(pathAsMaybeString);
+    const contents = await fs.readFile(
+      path.join(pagesDirectory, filepath),
+      "utf8"
+    );
+
+    const helper = getHelperJsDocs(contents);
+    const pathname = pageFilePathToPathname(pageExtensions, filepath);
+
+    const previousValue = routes.get(pathname);
+    routes.set(pathname, {
+      ...previousValue,
+      filepath,
+      pathname,
+      arguments: getArgumentsFromPath(pathname),
+      helper,
+    });
+  }
+  return routes;
+}
+
+async function getAppRoutesMap(
+  srcDirectory: string,
+  pageExtensions: ReadonlyArray<string>
+) {
+  const appDirectory = path.join(srcDirectory, "app");
+  const appGlobber = globbyStream([`**/page.{${pageExtensions.join(",")}}`], {
+    // ignore directory that starts with _ (_components)
+    ignore: ["**/_*/**"],
+    cwd: appDirectory,
+  });
+
+  const routes = new Map<string, Route>();
+
+  for await (const pathAsMaybeString of appGlobber) {
+    const filepath = String(pathAsMaybeString);
+    const contents = await fs.readFile(
+      path.join(appDirectory, filepath),
+      "utf8"
+    );
+
+    const helper = getHelperJsDocs(contents);
+    const pathname = appFilePathToPathname(pageExtensions, filepath);
+
+    const previousValue = routes.get(pathname);
+    routes.set(pathname, {
+      ...previousValue,
+      filepath,
+      pathname,
+      arguments: getAppArgumentsFromPath(pathname),
+      helper,
+    });
+  }
+
+  return routes;
+}
+
 export const generate = command({
   name: "next-static-paths",
   description: "Generate static path generation and helpers for next.js",
@@ -60,10 +138,10 @@ export const generate = command({
       defaultValue: () => "./generated",
       defaultValueIsSerializable: true,
     }),
-    pagesDirectory: option({
+    srcDirectory: option({
       type: Directory,
       long: "pages-dir",
-      defaultValue: () => "./pages",
+      defaultValue: () => "./",
       defaultValueIsSerializable: true,
     }),
     runtimeFilename: option({
@@ -99,39 +177,16 @@ export const generate = command({
     staticFilename,
     runtimeFilename,
     pageExtensions,
-    pagesDirectory,
+    srcDirectory,
   }) {
-    const glob = `**/*.{${pageExtensions.join(",")}}`;
-    const globber = globby.stream(glob, {
-      cwd: pagesDirectory,
-      ignore: [
-        ignoredFile("_app", pageExtensions),
-        ignoredFile("_document", pageExtensions),
-      ],
-    });
-    const routes = new Map<string, Route>();
+    const [pagesRoutes, appRoutes] = await Promise.all([
+      getPagesRoutesMap(srcDirectory, pageExtensions),
+      getAppRoutesMap(srcDirectory, pageExtensions),
+    ]);
 
-    for await (const pathAsMaybeString of globber) {
-      const filepath = String(pathAsMaybeString);
-      const contents = await fs.readFile(
-        path.join(pagesDirectory, filepath),
-        "utf8"
-      );
-
-      const helper = getHelperJsDocs(contents);
-      const pathname = filePathToPathname(pageExtensions, filepath);
-
-      const previousValue = routes.get(pathname);
-      routes.set(pathname, {
-        ...previousValue,
-        filepath,
-        pathname,
-        arguments: getArgumentsFromPath(pathname),
-        helper,
-      });
-    }
-
-    const sortedRoutes = new Map([...routes].sort());
+    const sortedRoutes = new Map(
+      [...pagesRoutes.entries(), ...appRoutes.entries()].sort()
+    );
 
     const helpers: string[] = [];
     for (const { pathname, helper, arguments: args } of sortedRoutes.values()) {
@@ -167,7 +222,7 @@ export const generate = command({
       console.error(
         `${danger} no helpers found, deleting ${chalk.red(paths.runtime)}`
       );
-      await fs.rm(paths.runtime);
+      await fs.unlink(paths.runtime);
     }
 
     console.error(

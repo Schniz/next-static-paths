@@ -1,8 +1,8 @@
 import { generate } from "../cli/command-generate";
-import fs from "fs/promises";
+import { promises as fs } from "fs";
 import os from "os";
 import path from "path";
-import { test, expect, spyOn } from "vitest";
+import { test, expect, vi } from "vitest";
 import { mkdirSync } from "fs";
 
 test("deletes the runtimes file when file is missing", async () => {
@@ -14,7 +14,7 @@ test("deletes the runtimes file when file is missing", async () => {
   await generate.handler({
     outputDir: `${testDir}/generated`,
     pageExtensions: ["jsx", "js"],
-    pagesDirectory: `${testDir}/pages`,
+    srcDirectory: testDir,
     runtimeFilename: "runtime.ts",
     staticFilename: "static.d.ts",
   });
@@ -32,7 +32,7 @@ test("deletes the runtimes file when file is missing", async () => {
   await generate.handler({
     outputDir: `${testDir}/generated`,
     pageExtensions: ["jsx", "js"],
-    pagesDirectory: `${testDir}/pages`,
+    srcDirectory: testDir,
     runtimeFilename: "runtime.ts",
     staticFilename: "static.d.ts",
   });
@@ -55,7 +55,7 @@ test("generates the files", async () => {
   await generate.handler({
     outputDir: `${testDir}/generated`,
     pageExtensions: ["jsx", "js"],
-    pagesDirectory: `${testDir}/pages`,
+    srcDirectory: testDir,
     runtimeFilename: "runtime.ts",
     staticFilename: "static.d.ts",
   });
@@ -125,8 +125,8 @@ function randomTempDir() {
 }
 
 function spyOnStderr() {
-  const consoleError = spyOn(console, "error").mockImplementation(() => {});
-  const write = spyOn(process.stderr, "write").mockImplementation(
+  const consoleError = vi.spyOn(console, "error").mockImplementation(() => {});
+  const write = vi.spyOn(process.stderr, "write").mockImplementation(
     (a: any, b: any, c: any) => {
       if (typeof b === "function") {
         b();
