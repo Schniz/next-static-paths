@@ -1,25 +1,7 @@
-# next-static-paths
+# @nirtami2/next-static-paths
 
-## 0.0.6
+## 0.1.0
 
-### Patch Changes
+### Minor Changes
 
-- d81f4ff: add a readme to the npm package
-
-## 0.0.5
-
-### Patch Changes
-
-- 477976c: Add repository to package.json
-
-## 0.0.4
-
-### Patch Changes
-
-- 238a159: Allow TypedLink to receive children in the types
-
-## 0.0.3
-
-### Patch Changes
-
-- 3013374: Remove the `as` prop from the link
+- 14d3fa6: Support next 13 app router pages
