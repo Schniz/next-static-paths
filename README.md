@@ -7,6 +7,8 @@ See https://github.com/vercel/next.js/discussions/50118
 
 # `@nirtamir2/next-static-paths`
 
+[![npm version](https://badge.fury.io/js/@nirtamir2%2Fnext-static-paths.svg)](https://badge.fury.io/js/@nirtamir2%2Fnext-static-paths)
+
 Statically prevent HTTP 404 Not Found in your Next.js applications using TypeScript and code generation.
 
 ## Features
