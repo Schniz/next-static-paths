@@ -11,7 +11,7 @@ declare module "@@@next-static-paths" {
   "/app-directory": Record<never, never>,
   "/app-directory/dynamic/[userId]": {"userId": string},
   "/app-directory/group/sign-in": Record<never, never>,
-  "/app-directory/splat/[...rest]": {"...rest": string},
+  "/app-directory/splat/[...rest]": {"rest": string[]},
   "/dynamic/[userId]": {"userId": string},
   "/splat/[...rest]": {"rest": string[]}
   }
