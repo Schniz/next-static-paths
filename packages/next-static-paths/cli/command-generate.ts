@@ -215,7 +215,7 @@ export const generate = command({
       );
       await fs.writeFile(
         paths.runtime,
-        maybePrettify([getIntroString(), "", ...helpers].join("\n\n")),
+        await maybePrettify([getIntroString(), "", ...helpers].join("\n\n")),
         "utf8"
       );
     } else if (existsSync(paths.runtime)) {
@@ -230,7 +230,7 @@ export const generate = command({
     );
     await fs.writeFile(
       paths.static,
-      maybePrettify(
+      await maybePrettify(
         [
           getIntroString(),
           "",
@@ -294,10 +294,10 @@ function write(writable: Writable, data: string): Promise<void> {
   });
 }
 
-function maybePrettify(input: string): string {
+async function maybePrettify(input: string): Promise<string> {
   try {
     const resolved = require("prettier");
-    return resolved.format(input, { parser: "typescript" });
+    return await resolved.format(input, { parser: "typescript" });
   } catch {}
   return input;
 }
