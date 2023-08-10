@@ -25,6 +25,16 @@ $ yarn next-static-paths
 $ npx next-static-paths
 ```
 
+It's recommended to configure scripts in your `package.json` too
+
+```json
+{
+  "dev": "next-static-paths --pages-dir ./src --output . && next dev",
+  "generate-routes": "next-static-paths --pages-dir ./src --output . && :"
+}
+```
+
+
 ### `TypedLink` component
 
 ```tsx
