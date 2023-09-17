@@ -27,5 +27,6 @@ export function appFilePathToPathname(
       .replace(/\/+$/, "")
       .replace(/^$/, "/")
       .replace(/\[\[(.*?)]]/g, "[$1]")
+      .replace(/\/@[^/]+/, "")
   );
 }
