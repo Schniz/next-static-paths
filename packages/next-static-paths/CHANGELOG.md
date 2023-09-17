@@ -1,5 +1,11 @@
 # @nirtami2/next-static-paths
 
+## 0.4.0
+
+### Minor Changes
+
+- 1d4e754: Support parallel routes
+
 ## 0.3.0
 
 ### Minor Changes
