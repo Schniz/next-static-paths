@@ -1,5 +1,11 @@
 # @nirtami2/next-static-paths
 
+## 0.5.0
+
+### Minor Changes
+
+- 2cb6122: Support next.js 14
+
 ## 0.4.0
 
 ### Minor Changes
