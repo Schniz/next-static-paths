@@ -1,5 +1,5 @@
 import { test, expect } from "vitest";
-import { pathFor } from "next-static-paths";
+import { pathFor } from "@nirtamir2/next-static-paths";
 
 test("/", () => {
   expect(pathFor("/")).toEqual("/");
@@ -38,6 +38,6 @@ test("/splat/[...rest]", () => {
 
   pathFor("/splat/[...rest]", { rest: [] });
   expect(pathFor("/splat/[...rest]", { rest: ["hello", "wor/ld"] })).toEqual(
-    "/splat/hello/wor%2Fld"
+    "/[[...rest]]/hello/wor%2Fld"
   );
 });

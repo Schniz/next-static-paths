@@ -1,25 +1,37 @@
-# next-static-paths
+# @nirtami2/next-static-paths
 
-## 0.0.6
+## 0.6.0
 
-### Patch Changes
+### Minor Changes
 
-- d81f4ff: add a readme to the npm package
+- 8c88464: Upgrade dependencies and drop Node.js 16
 
-## 0.0.5
+## 0.5.0
 
-### Patch Changes
+### Minor Changes
 
-- 477976c: Add repository to package.json
+- 2cb6122: Support next.js 14
 
-## 0.0.4
+## 0.4.0
 
-### Patch Changes
+### Minor Changes
 
-- 238a159: Allow TypedLink to receive children in the types
+- 1d4e754: Support parallel routes
 
-## 0.0.3
+## 0.3.0
 
-### Patch Changes
+### Minor Changes
 
-- 3013374: Remove the `as` prop from the link
+- 9a41b3c: support prettier v3
+
+## 0.2.0
+
+### Minor Changes
+
+- b0efbde: Fix variadic argument type
+
+## 0.1.0
+
+### Minor Changes
+
+- 14d3fa6: Support next 13 app router pages

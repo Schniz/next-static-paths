@@ -1,4 +1,4 @@
-import { TypedLink } from "next-static-paths";
+import { TypedLink } from "@nirtamir2/next-static-paths";
 import { test, expect, describe } from "vitest";
 import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
@@ -16,7 +16,7 @@ test("/", () => {
   expect(
     renderToStaticMarkup(
       <TypedLink as="/">
-        <a>Hello</a>
+        Hello
       </TypedLink>
     )
   ).toEqual(`<a href="/">Hello</a>`);
@@ -33,7 +33,7 @@ describe("/dynamic/[userId]", () => {
     expect(
       renderToStaticMarkup(
         <TypedLink as="/dynamic/[userId]" userId="my-user-id">
-          <a>Hello</a>
+          Hello
         </TypedLink>
       )
     ).toEqual(`<a href="/dynamic/my-user-id">Hello</a>`);
@@ -51,7 +51,7 @@ describe("/splat/[...rest]", () => {
     expect(
       renderToStaticMarkup(
         <TypedLink as="/splat/[...rest]" rest={["my-rest", "wel/come"]}>
-          <a>Hello</a>
+          Hello
         </TypedLink>
       )
     ).toEqual(`<a href="/splat/my-rest/wel%2Fcome">Hello</a>`);

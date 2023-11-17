@@ -9,7 +9,7 @@
     "changeset:publish": "pnpm run build && changeset publish"
   },
   "devDependencies": {
-    "@changesets/cli": "^2.22.0",
-    "turbo": "^1.2.9"
+    "@changesets/cli": "^2.26.2",
+    "turbo": "^1.10.16"
   }
 }

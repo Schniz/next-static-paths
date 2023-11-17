@@ -1,10 +1,11 @@
 {
-  "name": "next-static-paths",
-  "version": "0.0.6",
+  "name": "@nirtamir2/next-static-paths",
+  "version": "0.6.0",
   "description": "Static types for routing in Next.js apps",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "types": "./root.d.ts",
+  "sideEffects": false,
   "scripts": {
     "bin": "pnpm run --silent ts-node -- cli/index.ts",
     "build": "rm -rf dist; pnpm run build:cli && pnpm run build:lib",
@@ -12,13 +13,15 @@
     "build:lib": "tsc -p ./tsconfig.cjs.json && tsc -p ./tsconfig.esm.json",
     "test": "vitest",
     "ts-node": "node -r @swc-node/register",
+    "type-check": "tsc --noEmit",
+    "format": "prettier src/**/*.ts cli/**/*.ts --write",
     "lint": "prettier src/**/*.ts cli/**/*.ts --check"
   },
   "bin": {
     "next-static-paths": "./bin/next-static-paths.js"
   },
   "repository": {
-    "url": "https://github.com/Schniz/next-static-paths",
+    "url": "https://github.com/nirtamir2/next-static-paths",
     "type": "git",
     "directory": "packages/next-static-paths"
   },
@@ -29,25 +32,28 @@
     "augment.d.ts"
   ],
   "keywords": [],
-  "author": "Gal Schlezinger <gal@spitfire.co.il>",
+  "author": "Nir Tamir <nirtamir2@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "@swc-node/register": "^1.4.2",
-    "@types/react": "^17.0.42",
-    "chalk": "4",
-    "cmd-ts": "^0.10.0",
-    "esbuild": "^0.14.25",
-    "globby": "11",
-    "next": "^12.1.0",
-    "prettier": "^2.6.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "typescript": "^4.6.2",
-    "vitest": "^0.5.9"
+    "@swc-node/register": "^1.6.8",
+    "@types/react": "^18.2.37",
+    "chalk": "^5.3.0",
+    "cmd-ts": "^0.13.0",
+    "esbuild": "^0.19.5",
+    "globby": "^14.0.0",
+    "next": "^14.0.3",
+    "prettier": "^3.1.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "typescript": "^5.2.2",
+    "vitest": "^0.34.6"
   },
   "peerDependencies": {
-    "next": "^12.1.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "next": "^13.4.6 || ^14.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "engines": {
+    "node": ">=18"
   }
 }

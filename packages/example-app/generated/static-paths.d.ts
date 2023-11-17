@@ -8,6 +8,10 @@
 declare module "@@@next-static-paths" {
   interface Paths {
   "/": Record<never, never>,
+  "/app-directory": Record<never, never>,
+  "/app-directory/dynamic/[userId]": {"userId": string},
+  "/app-directory/group/sign-in": Record<never, never>,
+  "/app-directory/splat/[...rest]": {"rest": string[]},
   "/dynamic/[userId]": {"userId": string},
   "/splat/[...rest]": {"rest": string[]}
   }

@@ -1,10 +1,13 @@
-# This feature is supported natively in [Next.js 13.2](https://nextjs.org/13-2)
+This is a fork of [next-static-paths](https://github.com/Schniz/next-static-paths)
+that supports next.js 13 app router.
 
-upgrade and have fun!
+Although [Next.js 13.2](https://nextjs.org/blog/next-13-2#statically-typed-links) added experimental `typeRoutes` feature for statically typed links -
+we cannot easily search them as plain text.
+See https://github.com/vercel/next.js/discussions/50118
 
----
+# `@nirtamir2/next-static-paths`
 
-# `next-static-paths`
+[![npm version](https://badge.fury.io/js/@nirtamir2%2Fnext-static-paths.svg)](https://badge.fury.io/js/@nirtamir2%2Fnext-static-paths)
 
 Statically prevent HTTP 404 Not Found in your Next.js applications using TypeScript and code generation.
 
@@ -19,24 +22,24 @@ Statically prevent HTTP 404 Not Found in your Next.js applications using TypeScr
 ## Usage
 
 ```sh-session
-$ pnpm add next-static-paths
+$ pnpm add @nirtamir2/next-static-paths
 # or
-$ yarn add next-static-paths
+$ yarn add @nirtamir2/next-static-paths
 # or
-$ npm install next-static-paths
+$ npm install @nirtamir2/next-static-paths
 ```
 
 Then, from within your Next.js application root, run the following command:
 
 ```sh-session
 # For pnpm users
-$ pnpx next-static-paths
+$ pnpx @nirtamir2/next-static-paths
 
 # For yarn users
-$ yarn next-static-paths
+$ yarn @nirtamir2/next-static-paths
 
 # For npm users
-$ npx next-static-paths
+$ npx @nirtamir2/next-static-paths
 ```
 
 ## Usage screenshots

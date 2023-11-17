@@ -14,21 +14,21 @@ type PathKeysWithArguments = {
  */
 export function pathFor<K extends PathKeysWithoutArguments>(
   key: K,
-  args?: undefined
+  args?: undefined,
 ): string;
 export function pathFor<K extends PathKeysWithArguments>(
   key: K,
-  args: Paths[K]
+  args: Paths[K],
 ): string;
 export function pathFor<
-  K extends PathKeysWithArguments | PathKeysWithoutArguments
+  K extends PathKeysWithArguments | PathKeysWithoutArguments,
 >(key: K, args?: Record<Paths[K][number], string>): string {
   return (key as string).replace(
     /\[(?:\.\.\.)?([^\]]+)\]/g,
     (_, argumentKey) => {
       if (typeof args === "undefined" || !(argumentKey in args)) {
         throw new Error(
-          `pathFor: argument ${argumentKey} is missing for route ${key}`
+          `pathFor: argument ${argumentKey} is missing for route ${key}`,
         );
       }
 
@@ -41,6 +41,6 @@ export function pathFor<
       } else {
         return value.map(encodeURIComponent).join("/");
       }
-    }
+    },
   );
 }

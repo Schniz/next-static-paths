@@ -19,7 +19,7 @@ export function TypedLink<K extends keyof Paths>(
   return <Link {...restProps} href={generatedPath} />;
 }
 
-function omit<T, Keys extends string>(
+function omit<T extends object, Keys extends string>(
   value: T,
   ...keys: Keys[]
 ): Omit<T, Keys> {
