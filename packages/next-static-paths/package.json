@@ -5,6 +5,7 @@
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "types": "./root.d.ts",
+  "sideEffects": false,
   "scripts": {
     "bin": "pnpm run --silent ts-node -- cli/index.ts",
     "build": "rm -rf dist; pnpm run build:cli && pnpm run build:lib",
@@ -51,5 +52,8 @@
     "next": "^13.4.6 || ^14.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
+  },
+  "engines": {
+    "node": ">=18"
   }
 }
