@@ -1,6 +1,6 @@
 export function pageFilePathToPathname(
   pageExtensions: readonly string[],
-  filePath: string
+  filePath: string,
 ): string {
   const extensionsRegex = new RegExp(`\\.(${pageExtensions.join("|")})$`);
   return filePath
@@ -14,7 +14,7 @@ export function pageFilePathToPathname(
 
 export function appFilePathToPathname(
   pageExtensions: readonly string[],
-  filePath: string
+  filePath: string,
 ): string {
   const extensionsRegex = new RegExp(`\\page.(${pageExtensions.join("|")})$`);
   return (

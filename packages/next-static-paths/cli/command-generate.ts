@@ -56,7 +56,7 @@ const PageExtensionType = extendType(array(string), {
 
 async function getPagesRoutesMap(
   srcDirectory: string,
-  pageExtensions: ReadonlyArray<string>
+  pageExtensions: ReadonlyArray<string>,
 ) {
   const pagesDirectory = path.join(srcDirectory, "pages");
 
@@ -74,7 +74,7 @@ async function getPagesRoutesMap(
     const filepath = String(pathAsMaybeString);
     const contents = await fs.readFile(
       path.join(pagesDirectory, filepath),
-      "utf8"
+      "utf8",
     );
 
     const helper = getHelperJsDocs(contents);
@@ -94,7 +94,7 @@ async function getPagesRoutesMap(
 
 async function getAppRoutesMap(
   srcDirectory: string,
-  pageExtensions: ReadonlyArray<string>
+  pageExtensions: ReadonlyArray<string>,
 ) {
   const appDirectory = path.join(srcDirectory, "app");
   const appGlobber = globbyStream([`**/page.{${pageExtensions.join(",")}}`], {
@@ -109,7 +109,7 @@ async function getAppRoutesMap(
     const filepath = String(pathAsMaybeString);
     const contents = await fs.readFile(
       path.join(appDirectory, filepath),
-      "utf8"
+      "utf8",
     );
 
     const helper = getHelperJsDocs(contents);
@@ -185,7 +185,7 @@ export const generate = command({
     ]);
 
     const sortedRoutes = new Map(
-      [...pagesRoutes.entries(), ...appRoutes.entries()].sort()
+      [...pagesRoutes.entries(), ...appRoutes.entries()].sort(),
     );
 
     const helpers: string[] = [];
@@ -193,7 +193,7 @@ export const generate = command({
       if (helper) {
         helpers.push(generateHelperCode(helper, pathname, args));
         console.error(
-          `${logRoutes} Found ${pathname} (${chalk.cyan(helper.name)})`
+          `${logRoutes} Found ${pathname} (${chalk.cyan(helper.name)})`,
         );
       } else {
         console.error(`${logRoutes} Found ${pathname}`);
@@ -210,23 +210,23 @@ export const generate = command({
     if (helpers.length) {
       console.error(
         `${logOutput} Generated ${helpers.length} helpers to ${chalk.cyan(
-          paths.runtime
-        )}`
+          paths.runtime,
+        )}`,
       );
       await fs.writeFile(
         paths.runtime,
         await maybePrettify([getIntroString(), "", ...helpers].join("\n\n")),
-        "utf8"
+        "utf8",
       );
     } else if (existsSync(paths.runtime)) {
       console.error(
-        `${danger} no helpers found, deleting ${chalk.red(paths.runtime)}`
+        `${danger} no helpers found, deleting ${chalk.red(paths.runtime)}`,
       );
       await fs.unlink(paths.runtime);
     }
 
     console.error(
-      `${logOutput} generating static interface to ${chalk.cyan(paths.static)}`
+      `${logOutput} generating static interface to ${chalk.cyan(paths.static)}`,
     );
     await fs.writeFile(
       paths.static,
@@ -237,9 +237,9 @@ export const generate = command({
           `declare module "@@@next-static-paths" {`,
           getInterface([...sortedRoutes.values()]).replace(/^/gm, "  "),
           "}",
-        ].join("\n")
+        ].join("\n"),
       ),
-      "utf8"
+      "utf8",
     );
 
     await write(process.stderr, chalk.bgGreen.black.bold(" SUCCESS ") + " ");
@@ -249,7 +249,7 @@ export const generate = command({
     }
     await write(
       process.stderr,
-      `${chalk.cyan(sortedRoutes.size)} static paths.`
+      `${chalk.cyan(sortedRoutes.size)} static paths.`,
     );
     await write(process.stderr, "\n");
   },
@@ -296,8 +296,8 @@ function write(writable: Writable, data: string): Promise<void> {
 
 async function maybePrettify(input: string): Promise<string> {
   try {
-    const resolved = require("prettier");
-    return await resolved.format(input, { parser: "typescript" });
+    const prettier = await import("prettier");
+    return await prettier.format(input, { parser: "typescript" });
   } catch {}
   return input;
 }

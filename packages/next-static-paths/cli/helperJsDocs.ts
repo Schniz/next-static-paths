@@ -13,7 +13,7 @@ export function getHelperJsDocs(contents: string): HelperJsDocs | undefined {
 export function generateHelperCode(
   { name }: HelperJsDocs,
   pathname: string,
-  argsObject: ArgObject
+  argsObject: ArgObject,
 ) {
   const comment = `/** A helper for ${pathname} */`;
   const argKeys = Object.keys(argsObject);
